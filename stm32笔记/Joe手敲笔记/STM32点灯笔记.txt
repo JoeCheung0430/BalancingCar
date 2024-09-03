@@ -1,0 +1,54 @@
+点亮PA0口的LED
+1.调用函数：RCC里面的APB2外设时钟控制函数——RCC_APB2PeriphClockCmd
+2.选择外设：参数1——RCC_APB2Periph_GPIOA
+                    参数2——ENABLE
+3.结构体：GPIO_InitTypeDef GPIO_InitStructure
+   结构体名字.结构体的成员
+  GPIO_Mode：AIN 模拟输入
+                         IN_FLOATING 浮空输入
+                         IPD　下拉输入
+                    　  IPU　上拉输入
+　　　　　　　 Out_OD　开漏输出 ——高电平没有驱动能力
+　　　　　　　 Out_PP　推挽输出（点灯用）——高低电平均有驱动能力
+　　　　　　　 AF_OD　复用开漏
+　　　　　　　 AF_PP　复用推挽
+　GPIO_Pin：０号引脚用０（GPIO_Pin_0）GPIO_Pin_All——16个端口全部设置
+　GPIO_Speed：选择５０ＭＨｚ（GPIO_Speed_50MHz）
+4.调用GPIO_Init函数（GPIOA，&GPIO_InitStructure)
+5.四个GPIO的输出函数：
+GPIO_SetBits(GPIOx, GPIO_Pin_引脚数)——把指定端口设置为高电平
+GPIO_ResetBits(GPIOx, GPIO_Pin_引脚数)——把指定端口设置为低电平
+GPIO_WriteBit(GPIOx, GPIO_Pin_引脚数，Bitval——Bit_SET高电平　Bit_RESET——低电平）
+后面的参数替换：(BitAction)0——低电平 ；(BitAction)1——高电平
+GPIO_Write（GPIOx,PortVal——指定写到输出数据寄存器的值）——同时对16个端口进行写入操作
+（~按位取反符号）
+5.*引脚口A15、B3、B4别选（JTAG的调试端口）
+6.头文件建立格式：#ifndef __名称_H
+                           #define __名称_H
+                           结尾：#endif
+7.uint8_t——unsigned char的意思
+8.四个GPIO的读取函数 
+GPIO_ReadInputDataBit——读取输入数据寄存器某一个端口的输入值
+GPIO_ReadInputData——读取整个输入数据寄存器的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
